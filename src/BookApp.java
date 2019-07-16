@@ -29,7 +29,7 @@ public class BookApp {
 			userChoice = scnr.nextInt();
 			
 			if (userChoice == 1) {
-				System.out.println(" 1. Search by Author\n 2. Search by Title\n 3. Search by Genre");
+				System.out.println("Select how you'd like to retrieve book:\n 1. Search by Author\n 2. Search by Title\n 3. Search by Genre");
 				userChoice = scnr.nextInt();
 				scnr.nextLine();
 					if(userChoice == 1) {

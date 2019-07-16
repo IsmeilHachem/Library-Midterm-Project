@@ -10,7 +10,7 @@ public class LibraryInventoryUtil {
 	
 	// Modify this method as necessary to convert a line of text from the file to a new item instance
 	private static Book convertLineToItem(String line) {
-		String[] parts = line.split("\t");
+		String[] parts = line.split(",");
 		Book books = new Book();
 		books.setTitle(parts[0]);
 		books.setAuthor(parts[1]);
@@ -22,7 +22,7 @@ public class LibraryInventoryUtil {
 	
 	// Modify this method as necessary to convert an item instance to a line of text in the file
 	private static String convertItemToLine(Book books) {
-		return String.format("%-40s\t%s\t%s\t%d", books.getTitle(), books.getAuthor(), books.getStatus(), books.getSerialNum());
+		return String.format("%-40s\t%-15s\t%-12s\t%d", books.getTitle(), books.getAuthor(), books.getStatus(), books.getSerialNum());
 		// string tab number
 	}
 
@@ -33,6 +33,7 @@ public class LibraryInventoryUtil {
 			items.add(convertLineToItem(line));
 		}
 		return items;
+		
 //		Or with streams...
 //		return linesHelper.readFile().stream().map(PlayerFileUtil::convertLineToItem).collect(Collectors.toList());
 	}
