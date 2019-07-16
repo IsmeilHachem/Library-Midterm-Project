@@ -72,7 +72,7 @@ public class BookApp {
 		
 		List<Book> books = LibraryInventoryUtil.readFile();
 			for (Book b : books) {
-				System.out.printf("%-40s\t%-15s\t%-12s\t%d\n", b.getTitle(), b.getAuthor(), b.getStatus(), b.getSerialNum() );
+				System.out.printf("%-40s\t%-20s\t%-15s\t%2d\n", b.getTitle(), b.getAuthor(), b.getStatus(), b.getSerialNum() );
 			}
 		
 	}
