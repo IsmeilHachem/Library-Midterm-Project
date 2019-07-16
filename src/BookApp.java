@@ -1,4 +1,5 @@
-import java.util.Calendar;
+
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class BookApp {
@@ -20,14 +21,16 @@ public class BookApp {
 			} else if (userChoice == 2) {
 				System.out.println("Enter the serial number please.");
 				serialNumb = scnr.nextInt();
-				Book book = new Book("Silent Lambs", "Hannibal", Status.onShelf, 7);
-				Calendar test = null;
-				test.set(2017, 06, 07);
-				System.out.println(test);
-				book.setDueDate(test);
 				
+				//Testing
+				Book book = new Book("Silent Lambs", "Hannibal", Status.onShelf.toString(), 7);
+				//LocalDate test = LocalDate.of(2019, 07, 07);				
+				//System.out.println(test + "Main");
+				book.makeDueDate();	
+				System.out.println(book.getDueDate() + "Due Date");
 				book.isExpired();
-
+				//Testing
+				
 			}
 			
 		}while(!Valid);

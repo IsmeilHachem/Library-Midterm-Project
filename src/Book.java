@@ -1,15 +1,16 @@
-import java.util.Calendar;
+import java.time.LocalDate;
+
 
 public class Book {
 	private String title;
 	private String author;
-	protected Status status;
-	protected Calendar dueDate;
+	protected String status;
+	protected LocalDate dueDate;
 	private int serialNum;
 	
 	public Book() {}
 	
-	public Book(String title, String author, Status status, int serialNum) {
+	public Book(String title, String author, String status, int serialNum) {
 		this.title = title;
 		this.author = author;
 		this.status = status;
@@ -32,19 +33,19 @@ public class Book {
 		this.author = author;
 	}
 	
-	public Status getStatus() {
+	public String getStatus() {
 		return status;
 	}
 	
-	public void setStatus(Status status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 	
-	public Calendar getDueDate() {
+	public LocalDate getDueDate() {
 		return dueDate;
 	}
 	
-	public void setDueDate(Calendar dueDate) {
+	public void setDueDate(LocalDate dueDate) {
 		this.dueDate = dueDate;
 	}
 
@@ -52,17 +53,31 @@ public class Book {
 		return serialNum;
 	}
 	
+	
+	//Method to create due date two weeks from today
+	public void makeDueDate() {
+		LocalDate today = LocalDate.now(); //Collect today's date
+		
+		dueDate = today.plusDays(12);
+		System.out.println(dueDate); //Testing
+		
+	}
+	
+	//Method to determine if the book is being return on time or late of the due date
 	public boolean isExpired() {
-		Calendar today = Calendar.getInstance();
-		if(today.YEAR > dueDate.YEAR) {
-			if(today.MONTH > dueDate.MONTH) {
-				if(today.DAY_OF_MONTH > dueDate.DAY_OF_MONTH) {
-					System.out.println("Book is late dumbo. Bring momma over here to pay for your lateness my sire");
-				}
-			}	
-		} else 
-		return false;
-		return false;
+		LocalDate today = LocalDate.now(); //Collect today's date 
+		
+		//If statement to check due date to today's date
+		if (today.isAfter(dueDate)) {
+			System.out.println("Late"); //Testing
+			return true;
+		}else if(today.isBefore(dueDate)) {
+			System.out.println("This book is early");
+			return false;
+		}else {
+			System.out.println("On Time"); //Testing
+			return false;
+		}
 		
 	} 
 	
