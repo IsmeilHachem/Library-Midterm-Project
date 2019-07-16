@@ -31,37 +31,35 @@ public class BookApp {
 		int serialNumb = 0;// collect serial number
 
 		do {
-			System.out.println("Are you here to\n 1. Get a book?\n 2. Return a book?\n 3. Nahhhh save dem trees");
-			userChoice = scnr.nextInt();
+			//Added Validator for user choice
+			userChoice = Validator.getInt(scnr, "Are you here to\n 1. Get a book?\n 2. Return a book?\n 3. Nahhhh save dem trees");
 
 			if (userChoice == 1) {
 				// Display list of book objects
 				displayBooks(books);
 
-				// Prompt user for search choice
-				System.out.println(
-						"Select how you'd like to retrieve book:\n 1. Search by Title\n 2. Search by Author\n 3. Search by Genre");
-				userChoice = scnr.nextInt();// collect user input
-				scnr.nextLine();// clear scanner object to collect string in scanner
+				// Prompt user for search choice				
+				// collect user input
+				userChoice = Validator.getInt(scnr, "Select how you'd like to retrieve book:\n 1. Search by Title\n 2. Search by Author\n 3. Search by Genre");
+				
 
 				// Applying user input choice
 				if (userChoice == 1) {
-					System.out.println("Enter Title name: ");
-					input = scnr.nextLine();
+					//Validate user input
+					input = Validator.getString(scnr, "Enter Title name: " );
 					goodReturns = matchSearch(input.toLowerCase(), "title", books);
 					displayBooks(goodReturns);
 				} else if (userChoice == 2) {
-					System.out.println("Enter Author name: ");
-					input = scnr.nextLine();
+					//Validate user input
+					input = Validator.getString(scnr, "Enter Author name: ");
 					goodReturns = matchSearch(input.toLowerCase(), "author", books);
 					if (goodReturns.isEmpty()) {
 						System.out.println("Sorry that just doesn't exist here.");
 					} else {
 						displayBooks(goodReturns);
 						if (goodReturns.size() > 1) {
-							// Prompt user for title
-							System.out.println("Which title would you like?");
-							input = scnr.nextLine();
+							// Prompt user for title							
+							input = Validator.getString(scnr, "Which title would you like?");
 							goodReturns = matchSearch(input.toLowerCase(), "title", goodReturns);
 							displayBooks(goodReturns);// testing
 						}
@@ -75,9 +73,10 @@ public class BookApp {
 //					displayBooks(goodReturns);
 //				}
 
-			} else if (userChoice == 2) {
-				System.out.println("Enter the serial number please.");
-				serialNumb = scnr.nextInt();
+			} else if (userChoice == 2) {	
+				
+				//use validator class to verify input
+				serialNumb = Validator.getInt(scnr, "Enter the serial number please.");
 
 //				// Testing
 //				Book book = new Book("Silent Lambs", "Hannibal", Status.onShelf.toString(), 7);
@@ -100,7 +99,7 @@ public class BookApp {
 	public static void displayBooks(List<Book> bookList) {
 
 		// Print out headers for the columns
-		System.out.printf("%-40s\t%-20s\t%-15s\t%14s\n", "Title", "Author", "Status", "Serial Number");
+		System.out.printf("%-40s\t%-20s\t%-15s\t%-14s\n", "Title", "Author", "Status", "Serial Number");
 
 		// Collect book items from IO File and print on single lines
 		List<Book> books = bookList;
