@@ -19,8 +19,8 @@ public class BookApp {
 				System.out.println("IOException");
 			}
 		}
-		List<Book> books = LibraryInventoryUtil.readFile(); //collect list of books
-		List<Book> goodReturns = new ArrayList<>(); //collect array of users choices from search menu
+		List<Book> books = LibraryInventoryUtil.readFile(); // collect list of books
+		List<Book> goodReturns = new ArrayList<>(); // collect array of users choices from search menu
 		// ArrayList<Book> books = new ArrayList<>();
 		Scanner scnr = new Scanner(System.in);
 		System.out.println("Welcome to the Grand Circus Library!");
@@ -47,15 +47,27 @@ public class BookApp {
 				// Applying for user input
 				if (userChoice == 1) {
 					System.out.println("Enter Title name: ");
-					input = scnr.nextLine();					
-					goodReturns = matchSearch(input.toLowerCase(), "title", books);	
+					input = scnr.nextLine();
+					goodReturns = matchSearch(input.toLowerCase(), "title", books);
 					displayBooks(goodReturns);
 				} else if (userChoice == 2) {
 					System.out.println("Enter Author name: ");
 					input = scnr.nextLine();
 					goodReturns = matchSearch(input.toLowerCase(), "author", books);
-					displayBooks(goodReturns);
-			} 
+					if (goodReturns.isEmpty()) {
+						System.out.println("Sorry that just doesn't exist here.");
+					} else {
+						displayBooks(goodReturns);
+						if (goodReturns.size() > 1) {
+							// Prompt user for title
+							System.out.println("Which title would you like?");
+							input = scnr.nextLine();
+							goodReturns = matchSearch(input.toLowerCase(), "title", goodReturns);
+							displayBooks(goodReturns);//testing
+						}
+					}
+
+				}
 //					else {
 //					System.out.println("Enter Genre: ");
 //					input = scnr.nextLine();
@@ -98,9 +110,9 @@ public class BookApp {
 	}
 
 	// Method to match search parameters
-	public static List<Book> matchSearch(String choice, String type ,List<Book> books) {
+	public static List<Book> matchSearch(String choice, String type, List<Book> books) {
 		List<Book> bookMatches = new ArrayList<>();
-		
+
 		// type is defining which BookMethod to call to search for what the user wants
 		switch (type.toLowerCase()) {
 		case "title": {
@@ -129,6 +141,7 @@ public class BookApp {
 
 		return bookMatches;
 	}
-	
-	public void checkOutBook() {}
+
+	public void checkOutBook() {
+	}
 }
