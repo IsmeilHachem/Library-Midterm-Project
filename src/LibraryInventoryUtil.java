@@ -22,7 +22,7 @@ public class LibraryInventoryUtil {
 	
 	// Modify this method as necessary to convert an item instance to a line of text in the file
 	private static String convertItemToLine(Book books) {
-		return String.format("%-40s\t%-20s\t%-15s\t%2d", books.getTitle(), books.getAuthor(), books.getStatus(), books.getSerialNum());
+		return String.format("%-40s\t%-20s\t%-15s\t%02d", books.getTitle(), books.getAuthor(), books.getStatus(), books.getSerialNum());
 		// string tab number
 	}
 

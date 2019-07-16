@@ -4,7 +4,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.*;
+import java.util.List;
+import java.util.Scanner;
 
 public class BookApp {
 
@@ -90,7 +91,7 @@ public class BookApp {
 		// Collect book items from IO File and print on single lines
 		List<Book> books = bookList;
 		for (Book b : books) {
-			System.out.printf("%-40s\t%-20s\t%-15s\t%2d\n", b.getTitle(), b.getAuthor(), b.getStatus(),
+			System.out.printf("%-40s\t%-20s\t%-15s\t%02d\n", b.getTitle(), b.getAuthor(), b.getStatus(),
 					b.getSerialNum());
 		}
 
