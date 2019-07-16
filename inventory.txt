@@ -1,0 +1,19 @@
+"Queen of the Damned", "Anne Rice", On Shelf, 01
+"The Vampire Lestat", "Anne Rice", On Shelf, 02
+"The Witching Hour", "Anne Rice", On Shelf, 03
+"It", "Stephen King", On Shelf, 04
+
+"Alicia en el Pais de Maravillas", "Lewis Carroll", On Shelf, 05 
+"Winnie The Pooh", "A. A. Mine", On Shelf, 06
+"One Foot Two Foot Red Fish Blue Fish", "Dr. Seuss", On Shelf, 07
+"The Little Red Hen", "Diane Muldrow", On Shelf, 08
+
+"Harry Potter and The Philosopher's Stone", "J.K. Rowling", On Shelf, 09
+"Harry Potter and The Chamber of Secrets", "J.K. Rowling", On Shelf, 10
+"Harry Potter and The Prisoner of Azkaban", "J.K. Rowling", On Shelf, 11
+"Harry Potter and the Goblet of Fire", "J.K. Rowling", On Shelf, 12
+
+"Who says you can't you do", "Daniel Chidiac", On Shelf, 13 
+"The 48 laws of power", "Robert Greene", On Shelf, 14
+"The Alchemist", "Paulo Coelho", On Shelf, 15
+"The Power of Habit", "Charles Duhigg", On Shelf, 16

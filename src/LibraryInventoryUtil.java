@@ -12,8 +12,8 @@ public class LibraryInventoryUtil {
 	private static Book convertLineToItem(String line) {
 		String[] parts = line.split("\t");
 		Book books = new Book();
-		books.setAuthor(parts[0]);
-		books.setTitle(parts[1]);
+		books.setTitle(parts[0]);
+		books.setAuthor(parts[1]);
 		books.setStatus(null);
 		books.getSerialNum();
 		
@@ -22,7 +22,7 @@ public class LibraryInventoryUtil {
 	
 	// Modify this method as necessary to convert an item instance to a line of text in the file
 	private static String convertItemToLine(Book books) {
-		return String.format("%s\t%s\t%s\t%d", books.getAuthor(), books.getTitle(), books.getStatus(), books.getSerialNum());
+		return String.format("%-40s\t%s\t%s\t%d", books.getTitle(), books.getAuthor(), books.getStatus(), books.getSerialNum());
 		// string tab number
 	}
 
