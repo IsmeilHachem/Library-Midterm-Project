@@ -1,16 +1,13 @@
 
 public class Genre {
-	private genreType genre;
+	private String genre;
 
-	public genreType getGenre() {
+	public String getGenre() {
 		return genre;
 	}
 
-	public void setGenre(genreType genre) {
+	public void setGenre(String genre) {
 		this.genre = genre;
 	}
-	
-	
-	
 	
 }

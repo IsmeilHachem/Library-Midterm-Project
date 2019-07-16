@@ -27,8 +27,8 @@ public class LibraryInventoryUtil {
 	}
 
 	public static List<Book> readFile() {
-		List<String> lines = linesHelper.readFile(); // "joe/t17" 
-		List<Book> items = new ArrayList<>(lines.size()); // broken into category(item): name and pop.
+		List<String> lines = linesHelper.readFile();  
+		List<Book> items = new ArrayList<>(lines.size());
 		for (String line : lines) {
 			items.add(convertLineToItem(line));
 		}

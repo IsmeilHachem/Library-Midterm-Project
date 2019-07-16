@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 
 
-public class Book {
+public class Book extends Genre{
 	private String title;
 	private String author;
 	protected String status;
