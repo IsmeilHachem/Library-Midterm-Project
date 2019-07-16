@@ -58,10 +58,12 @@ public class BookApp {
 					} else {
 						displayBooks(goodReturns);
 						if (goodReturns.size() > 1) {
-							// Prompt user for title							
+							// Prompt user for title
 							input = Validator.getString(scnr, "Which title would you like?");
 							goodReturns = matchSearch(input.toLowerCase(), "title", goodReturns);
 							displayBooks(goodReturns);// testing
+							checkOutBook(input.toLowerCase(), books);
+							System.out.println("Should be checked out.");
 						}
 					}
 
@@ -143,6 +145,20 @@ public class BookApp {
 		return bookMatches;
 	}
 
-	public void checkOutBook() {
+	public static List<Book> checkOutBook(String choice, List<Book> books) {
+		System.out.println(choice + "Hi");
+		for (int i = 0; i < books.size(); i++) {
+			if (books.get(i).getTitle().toLowerCase().contains(choice)) {
+				System.out.println(books.get(i).getStatus().toLowerCase());
+				System.out.println(Status.onShelf.toString().toLowerCase());
+				if (books.get(i).getStatus().toLowerCase().equals(Status.onShelf.toString().toLowerCase())) {
+					System.out.println("Successful transaction. Book is now checked out.");
+					books.get(i).setStatus(Status.checkedOut.toString());
+				}
+			}
+		}return books;
+
+
+		
 	}
 }

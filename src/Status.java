@@ -1,4 +1,14 @@
 
 public enum Status {
-	onShelf, checkedOut 
+	onShelf{
+		public String toString() {
+			return "On Shelf";
+		}
+	}, checkedOut{
+		public String toString() {
+			return "Checked out";
+		}
+	} 
+	
+	
 }
