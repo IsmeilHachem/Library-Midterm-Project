@@ -44,7 +44,7 @@ public class BookApp {
 				userChoice = scnr.nextInt();// collect user input
 				scnr.nextLine();// clear scanner object to collect string in scanner
 
-				// Applying for user input
+				// Applying user input choice
 				if (userChoice == 1) {
 					System.out.println("Enter Title name: ");
 					input = scnr.nextLine();
@@ -63,7 +63,7 @@ public class BookApp {
 							System.out.println("Which title would you like?");
 							input = scnr.nextLine();
 							goodReturns = matchSearch(input.toLowerCase(), "title", goodReturns);
-							displayBooks(goodReturns);//testing
+							displayBooks(goodReturns);// testing
 						}
 					}
 
@@ -91,6 +91,8 @@ public class BookApp {
 			}
 
 		} while (!Valid);
+		
+		scnr.close();//close scanner object
 
 	}
 

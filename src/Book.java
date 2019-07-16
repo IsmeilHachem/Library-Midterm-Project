@@ -10,12 +10,14 @@ public class Book extends Genre{
 	
 	public Book() {}
 	
+	//constructor to add values to variables
 	public Book(String title, String author, String status, int serialNum) {
 		this.title = title;
 		this.author = author;
 		this.status = status;
 		this.serialNum = serialNum;
 	}
+	
 	
 	public String getTitle() {
 		return title;
