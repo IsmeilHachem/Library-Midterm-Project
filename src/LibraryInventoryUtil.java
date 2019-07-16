@@ -14,8 +14,8 @@ public class LibraryInventoryUtil {
 		Book books = new Book();
 		books.setTitle(parts[0]);
 		books.setAuthor(parts[1]);
-		books.setStatus(null);
-		books.getSerialNum();
+		books.setStatus(parts[2]);
+		books.setSerialNum(Integer.parseInt(parts[3]));
 		
 		return books;
 	}
