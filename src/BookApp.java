@@ -1,10 +1,22 @@
 
-import java.time.LocalDate;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class BookApp {
 
 	public static void main(String[] args) {
+		Path path = Paths.get("inventory.txt");
+		
+		if (Files.notExists(path)) {// catch IOExceptions which always may occur when dealing with files.
+			try {
+				Files.createFile(path);
+			} catch (IOException e) {
+				System.out.println("IOException");
+			}
+		}
 		Scanner scnr = new Scanner(System.in);
 		System.out.println("Welcome to the Grand Circus Library!");
 		
