@@ -45,8 +45,8 @@ public class Book {
 		return dueDate;
 	}
 	
-	public void setDueDate(LocalDate dueDate) {
-		this.dueDate = dueDate;
+	public void setSerialNum(int serialNum) {
+		this.serialNum = serialNum;
 	}
 
 	public int getSerialNum() {
