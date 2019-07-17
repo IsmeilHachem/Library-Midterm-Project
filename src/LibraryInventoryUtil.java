@@ -1,5 +1,6 @@
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,18 +12,20 @@ public class LibraryInventoryUtil {
 	// Modify this method as necessary to convert a line of text from the file to a new item instance
 	private static Book convertLineToItem(String line) {
 		String[] parts = line.split(",");
-		Book books = new Book();
+		Book books = new Book(LocalDate.parse(parts[5], YYYY-MM-DD));
 		books.setTitle(parts[0]);
 		books.setAuthor(parts[1]);
 		books.setStatus(parts[2]);
 		books.setSerialNum(Integer.parseInt(parts[3]));
+		books.setGenre(parts[4]);
+		
 		
 		return books;
 	}
 	
 	// Modify this method as necessary to convert an item instance to a line of text in the file
 	private static String convertItemToLine(Book books) {
-		return String.format("%-40s\t%-20s\t%-15s\t%02d", books.getTitle(), books.getAuthor(), books.getStatus(), books.getSerialNum());
+		return String.format("%-40s\t%-20s\t%-15s\t%02d", books.getTitle(), books.getAuthor(), books.getStatus(), books.getSerialNum(), books.getGenre(), books.getDueDate());
 		// string tab number
 	}
 

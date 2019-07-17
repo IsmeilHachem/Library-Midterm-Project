@@ -10,6 +10,10 @@ public class Book extends Genre{
 	
 	public Book() {}
 	
+	public Book(LocalDate dueDate) {
+		this.dueDate = dueDate;
+	}
+	
 	//constructor to add values to variables
 	public Book(String title, String author, String status, int serialNum) {
 		this.title = title;
@@ -54,6 +58,7 @@ public class Book extends Genre{
 	public int getSerialNum() {
 		return serialNum;
 	}
+	
 	
 	
 	//Method to create due date two weeks from today

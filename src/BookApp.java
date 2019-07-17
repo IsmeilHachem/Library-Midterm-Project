@@ -31,28 +31,32 @@ public class BookApp {
 		int serialNumb = 0;// collect serial number
 
 		do {
-			//Added Validator for user choice
-			userChoice = Validator.getInt(scnr, "Are you here to\n 1. Get a book?\n 2. Return a book?\n 3. Nahhhh save dem trees");
+			// Added Validator for user choice
+			userChoice = Validator.getInt(scnr,
+					"Are you here to\n 1. Get a book?\n 2. Return a book?\n 3. Nahhhh save dem trees");
 
 			if (userChoice == 1) {
 				// Display list of book objects
 				displayBooks(books);
 
-				// Prompt user for search choice				
+				// Prompt user for search choice
 				// collect user input
-				userChoice = Validator.getInt(scnr, "Select how you'd like to retrieve book:\n 1. Search by Title\n 2. Search by Author\n 3. Search by Genre");
-				
+				userChoice = Validator.getInt(scnr,
+						"Select how you'd like to retrieve book:\n 1. Search by Title\n 2. Search by Author\n 3. Search by Genre");
 
 				// Applying user input choice
 				if (userChoice == 1) {
-					//Validate user input
-					input = Validator.getString(scnr, "Enter Title name: " );
+					// Validate user input
+					input = Validator.getString(scnr, "Enter Title name: ");
 					goodReturns = matchSearch(input.toLowerCase(), "title", books);
 					displayBooks(goodReturns);
+					books = checkOutBook(input.toLowerCase(), books);
+
 				} else if (userChoice == 2) {
-					//Validate user input
+					// Validate user input
 					input = Validator.getString(scnr, "Enter Author name: ");
 					goodReturns = matchSearch(input.toLowerCase(), "author", books);
+
 					if (goodReturns.isEmpty()) {
 						System.out.println("Sorry that just doesn't exist here.");
 					} else {
@@ -62,8 +66,24 @@ public class BookApp {
 							input = Validator.getString(scnr, "Which title would you like?");
 							goodReturns = matchSearch(input.toLowerCase(), "title", goodReturns);
 							displayBooks(goodReturns);// testing
-							checkOutBook(input.toLowerCase(), books);
-							System.out.println("Should be checked out.");
+							books = checkOutBook(input.toLowerCase(), books);
+//							System.out.println("Should be checked out."); // testing
+						} else {
+//							System.out.println("Hola"); //test
+							for (int i = 0; i < books.size(); i++) {
+								System.out.println(i + " for loop "); //test
+								if (books.get(i).getAuthor().contains(input)) {
+									input = books.get(i).getTitle();
+									System.out.println(input); //test
+									break;
+								}
+							}
+							books = checkOutBook(input.toLowerCase(), books);
+						
+
+//							int num = books.indexOf(books.input);
+//							input = books.get(num).getTitle();
+//							checkOutBook(input.toLowerCase(), books);
 						}
 					}
 
@@ -75,9 +95,9 @@ public class BookApp {
 //					displayBooks(goodReturns);
 //				}
 
-			} else if (userChoice == 2) {	
-				
-				//use validator class to verify input
+			} else if (userChoice == 2) {
+
+				// use validator class to verify input
 				serialNumb = Validator.getInt(scnr, "Enter the serial number please.");
 
 //				// Testing
@@ -92,8 +112,8 @@ public class BookApp {
 			}
 
 		} while (!Valid);
-		
-		scnr.close();//close scanner object
+
+		scnr.close();// close scanner object
 
 	}
 
@@ -101,13 +121,13 @@ public class BookApp {
 	public static void displayBooks(List<Book> bookList) {
 
 		// Print out headers for the columns
-		System.out.printf("%-40s\t%-20s\t%-15s\t%-14s\n", "Title", "Author", "Status", "Serial Number");
+		System.out.printf("%-40s\t%-20s\t%-15s\t%-14s\t%-15s\n", "Title", "Author", "Status", "Serial Number", "Genre");
 
 		// Collect book items from IO File and print on single lines
 		List<Book> books = bookList;
 		for (Book b : books) {
-			System.out.printf("%-40s\t%-20s\t%-15s\t%02d\n", b.getTitle(), b.getAuthor(), b.getStatus(),
-					b.getSerialNum());
+			System.out.printf("%-40s\t%-20s\t%-15s\t%02d\t%-15s\n", b.getTitle(), b.getAuthor(), b.getStatus(),
+					b.getSerialNum(), b.getGenre());
 		}
 
 	}
@@ -146,19 +166,27 @@ public class BookApp {
 	}
 
 	public static List<Book> checkOutBook(String choice, List<Book> books) {
-		System.out.println(choice + "Hi");
+//		System.out.println(choice + "Hi"); // testing
 		for (int i = 0; i < books.size(); i++) {
 			if (books.get(i).getTitle().toLowerCase().contains(choice)) {
-				System.out.println(books.get(i).getStatus().toLowerCase());
-				System.out.println(Status.onShelf.toString().toLowerCase());
+//				System.out.println(books.get(i).getStatus().toLowerCase()); // testing
+//				System.out.println(Status.onShelf.toString().toLowerCase()); // testing
 				if (books.get(i).getStatus().toLowerCase().equals(Status.onShelf.toString().toLowerCase())) {
-					System.out.println("Successful transaction. Book is now checked out.");
+					books.get(i).makeDueDate();
+					System.out.println(
+							"Successful transaction. Book is now checked out until " + books.get(i).getDueDate() + ".");
 					books.get(i).setStatus(Status.checkedOut.toString());
+//					System.out.println(books.get(i).getStatus().toLowerCase()); //test
+//					System.out.println(books.get(i).getDueDate()); // test
+				} else {
+					System.out
+							.println("Sorry Charlie. That book ain't here. Pick anotha Charlie. It's checked out until "
+									+ books.get(i).getDueDate());
+					// add due dates
 				}
 			}
-		}return books;
+		}
+		return books;
 
-
-		
 	}
 }
