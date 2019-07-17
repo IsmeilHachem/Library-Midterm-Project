@@ -1,9 +1,9 @@
 "Queen of the Damned",Anne Rice,On Shelf,1,Horror,null
 "The Vampire Lestat",Anne Rice,On Shelf,2,Horror,null
 "The Witching Hour",Anne Rice,Checked out,3,Horror,2019-07-31
-"It",Stephen King,On Shelf,4,Horror,null
+"It",Stephen King,Checked out,4,Horror,2019-07-31
 "Alicia en el Pais de Maravillas",Lewis Carroll,On Shelf,5,Children,null
-"Winnie The Pooh",A. A. Mine,Checked out,6,Children,2019-07-31
+"Winnie The Pooh",A. A. Mine,Checked out,6,Children,2019-07-01
 "One Foot Two Foot Red Fish Blue Fish",Dr. Seuss,Checked out,7,Children,2019-07-31
 "The Little Red Hen",Diane Muldrow,Checked Out,8,Children,2019-07-23
 "Harry Potter and The Philosopher's Stone",J.K. Rowling,On Shelf,9,Mystery,null

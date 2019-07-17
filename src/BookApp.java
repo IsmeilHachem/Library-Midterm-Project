@@ -23,8 +23,10 @@ public class BookApp {
 		List<Book> goodReturns = new ArrayList<>(); // collect array of users choices from search menu
 		
 		Scanner scnr = new Scanner(System.in);
+		String flare = "📚";
+		flare = makeFlare(flare, 72);
 		System.out.println("Welcome to the Grand Circus Library!");
-
+		System.out.println(flare);
 		boolean Valid = true;// test whether to continue
 		int userChoice = 0;// collect user choice for numbered menu
 		String input = "";// accept input for String choices in menu
@@ -34,39 +36,58 @@ public class BookApp {
 			// Added Validator for user choice
 			userChoice = Validator.getInt(scnr,
 					"Are you here to\n 1. Get a book?\n 2. Return a book?\n 3. Exit");
-
+			
+			//Break up display
+			System.out.println("\n" + flare + "\n");
 			if (userChoice == 1) {
 				// Display list of book objects
 				displayBooks(books);
 
+				//Break up display
+				System.out.println("\n" + flare + "\n");
 				// Prompt user for search choice
 				// collect user input
 				userChoice = Validator.getInt(scnr,
 						"Select how you'd like to retrieve book:\n 1. Search by Title\n 2. Search by Author\n 3. Search by Genre");
 
+				//Break up display
+				System.out.println("\n" + flare + "\n");
 				// Applying user input choice
 				if (userChoice == 1) {
 					// Validate user input
 					input = Validator.getString(scnr, "Enter Title name: ");
+					System.out.println();//break up display
 					goodReturns = matchSearch(input.toLowerCase(), "title", books);
 					displayBooks(goodReturns);
+					System.out.println();//break up display
 					books = checkOutBook(input.toLowerCase(), books);
+					
+					//Break up display
+					System.out.println("\n" + flare + "\n");
 
 				} else if (userChoice == 2) {
 					// Validate user input
 					input = Validator.getString(scnr, "Enter Author name: ");
+					System.out.println();//break up display
 					goodReturns = matchSearch(input.toLowerCase(), "author", books);
 
 					if (goodReturns.isEmpty()) {
 						System.out.println("Sorry not available. Select again");
 					} else {
 						displayBooks(goodReturns);
+						
+						//Break up display
+						System.out.println("\n" + flare + "\n");
 						if (goodReturns.size() > 1) {
 							// Prompt user for title
 							input = Validator.getString(scnr, "Which title would you like?");
 							goodReturns = matchSearch(input.toLowerCase(), "title", goodReturns);
-							//displayBooks(goodReturns);// testing
+							displayBooks(goodReturns);
+							System.out.println();
 							books = checkOutBook(input.toLowerCase(), books);
+							
+							//Break up display
+							System.out.println("\n" + flare + "\n");
 						} else {
 							for (int i = 0; i < books.size(); i++) {
 								if (books.get(i).getAuthor().toLowerCase().contains(input.toLowerCase())) {
@@ -81,25 +102,36 @@ public class BookApp {
 
 				} else {
 					input = Validator.getString(scnr, "Enter Genre name: ");
+					System.out.println(); //break up display
 					goodReturns = matchSearch(input.toLowerCase(), "genre", books);
 					displayBooks(goodReturns);
+					
+					//Break up display
+					System.out.println("\n" + flare + "\n");
 					if (goodReturns.isEmpty()) {
 						System.out.println("That genre is not available."); 
 					} else {
 						if (goodReturns.size() > 1) {
 							input = Validator.getString(scnr, "Which title would you like?");
+							System.out.println(); //break up display
 							goodReturns = matchSearch(input.toLowerCase(), "title", goodReturns);
-							books = checkOutBook(input.toLowerCase(), books);
+							//books = checkOutBook(input.toLowerCase(), books);
 							if (goodReturns.size() > 1) {
 								System.out.println("We actually have more than one book with that word. Please select an author for your choice to be more clear.");
 								input = Validator.getString(scnr, "Which author would you like?");
+								System.out.println(); //break up display
 								goodReturns = matchSearch(input.toLowerCase(), "author", books);
+//								books = checkOutBook(input.toLowerCase(), books);
 								for (int i = 0; i < books.size(); i++) {
 									if (books.get(i).getAuthor().toLowerCase().contains(input.toLowerCase())) {
 										input = books.get(i).getTitle();
 										break;
 									}
 								}
+								goodReturns = matchSearch(input.toLowerCase(), "title", books);
+								books = checkOutBook(input.toLowerCase(), books);
+								//Break up display
+								System.out.println("\n" + flare + "\n");
 							}
 						} else {
 							for (int i = 0; i < books.size(); i++) {
@@ -121,8 +153,7 @@ public class BookApp {
 				// use validator class to verify input
 				serialNumb = Validator.getInt(scnr, "Enter the serial number please.");
 				
-				books = bookReturn(serialNumb, books);
-				displayBooks(books);//testing
+				books = bookReturn(serialNumb, books);				
 
 			}else {
 				System.out.println("Thank you for visiting have a wonderful day!!");
@@ -216,6 +247,7 @@ public class BookApp {
 				books.get(i).setStatus(Status.onShelf.toString());
 				if (books.get(i).isExpired() == true) {
 					System.out.println("You owe $10.00 for each day you're late!!");
+					System.out.println();//break up display
 				}
 				books.get(i).returnBook();
 
@@ -223,5 +255,16 @@ public class BookApp {
 		}
 
 		return books;
+	}
+	
+	public static String makeFlare(String pic, int quantity) {
+		String flare = "";
+		
+		for (int i = 0; i < quantity; i++) {
+			flare += pic;
+		}
+		
+		return flare;
+		
 	}
 }
