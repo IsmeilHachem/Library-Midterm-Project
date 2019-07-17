@@ -107,8 +107,6 @@ public class BookApp {
 										break;
 									}
 								}
-
-
 							}
 						} else {
 							for (int i = 0; i < books.size(); i++) {
@@ -120,11 +118,9 @@ public class BookApp {
 								}
 							}
 						}
-//						books = checkOutBook(input.toLowerCase(), books);
-						
+					
 					}
-//					displayBooks(goodReturns);
-//					books = checkOutBook(input.toLowerCase(), books);
+	
 
 				}
 
