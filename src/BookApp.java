@@ -21,7 +21,7 @@ public class BookApp {
 		}
 		List<Book> books = LibraryInventoryUtil.readFile(); // collect list of books
 		List<Book> goodReturns = new ArrayList<>(); // collect array of users choices from search menu
-		// ArrayList<Book> books = new ArrayList<>();
+		
 		Scanner scnr = new Scanner(System.in);
 		System.out.println("Welcome to the Grand Circus Library!");
 
@@ -71,19 +71,15 @@ public class BookApp {
 						} else {
 //							System.out.println("Hola"); //test
 							for (int i = 0; i < books.size(); i++) {
-								System.out.println(i + " for loop "); //test
-								if (books.get(i).getAuthor().contains(input)) {
+								//System.out.println(i + " for loop "); //test
+								if (books.get(i).getAuthor().toLowerCase().contains(input.toLowerCase())) {
 									input = books.get(i).getTitle();
-									System.out.println(input); //test
+									//System.out.println(input); //test
 									break;
 								}
 							}
 							books = checkOutBook(input.toLowerCase(), books);
 						
-
-//							int num = books.indexOf(books.input);
-//							input = books.get(num).getTitle();
-//							checkOutBook(input.toLowerCase(), books);
 						}
 					}
 
@@ -95,23 +91,28 @@ public class BookApp {
 //					displayBooks(goodReturns);
 //				}
 
+				//Return Book options
 			} else if (userChoice == 2) {
 
 				// use validator class to verify input
 				serialNumb = Validator.getInt(scnr, "Enter the serial number please.");
+				
+				books = bookReturn(serialNumb, books);
+				displayBooks(books);//testing
 
-//				// Testing
-//				Book book = new Book("Silent Lambs", "Hannibal", Status.onShelf.toString(), 7);
-//				// LocalDate test = LocalDate.of(2019, 07, 07);
-//				// System.out.println(test + "Main");
-//				book.makeDueDate();
-//				System.out.println(book.getDueDate() + "Due Date");
-//				book.isExpired();
-//				// Testing
-
+			}else {
+				try {
+					LibraryInventoryUtil.rewriteFile(books);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					System.out.println("Unable to write file");
+				}
+				Valid = false;
 			}
+			
+			
 
-		} while (!Valid);
+		} while (Valid);
 
 		scnr.close();// close scanner object
 
@@ -126,7 +127,7 @@ public class BookApp {
 		// Collect book items from IO File and print on single lines
 		List<Book> books = bookList;
 		for (Book b : books) {
-			System.out.printf("%-40s\t%-20s\t%-15s\t%02d\t%-15s\n", b.getTitle(), b.getAuthor(), b.getStatus(),
+			System.out.printf("%-40s\t%-20s\t%-15s\t%014d\t%-15s\n", b.getTitle(), b.getAuthor(), b.getStatus(),
 					b.getSerialNum(), b.getGenre());
 		}
 
@@ -188,5 +189,20 @@ public class BookApp {
 		}
 		return books;
 
+	}
+	
+	public static List<Book> bookReturn(int serialNum, List<Book> books) {
+		
+		for (int i = 0; i < books.size(); i++) {
+			if(books.get(i).getSerialNum() == serialNum)
+			{
+				books.get(i).setStatus(Status.onShelf.toString());
+				books.get(i).returnBook();
+				System.out.println(books.get(i).getDueDate());//Testing
+				
+			}
+		}
+		
+		return books;
 	}
 }

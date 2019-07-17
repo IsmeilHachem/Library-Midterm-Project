@@ -59,13 +59,17 @@ public class Book extends Genre{
 		return serialNum;
 	}
 	
-	
+	//Method to set the due date for a returned book
+	//Still preventing users to manually set a due date
+	public void returnBook() {
+		dueDate = null;
+	}
 	
 	//Method to create due date two weeks from today
 	public void makeDueDate() {
 		LocalDate today = LocalDate.now(); //Collect today's date
 		
-		dueDate = today.plusDays(12);
+		dueDate = today.plusDays(14);
 		System.out.println(dueDate); //Testing
 		
 	}
