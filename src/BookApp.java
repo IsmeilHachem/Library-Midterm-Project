@@ -33,7 +33,7 @@ public class BookApp {
 		do {
 			// Added Validator for user choice
 			userChoice = Validator.getInt(scnr,
-					"Are you here to\n 1. Get a book?\n 2. Return a book?\n 3. Nahhhh save dem trees");
+					"Are you here to\n 1. Get a book?\n 2. Return a book?\n 3. Exit");
 
 			if (userChoice == 1) {
 				// Display list of book objects
@@ -58,23 +58,19 @@ public class BookApp {
 					goodReturns = matchSearch(input.toLowerCase(), "author", books);
 
 					if (goodReturns.isEmpty()) {
-						System.out.println("Sorry that just doesn't exist here.");
+						System.out.println("Sorry not available. Select again");
 					} else {
 						displayBooks(goodReturns);
 						if (goodReturns.size() > 1) {
 							// Prompt user for title
 							input = Validator.getString(scnr, "Which title would you like?");
 							goodReturns = matchSearch(input.toLowerCase(), "title", goodReturns);
-							displayBooks(goodReturns);// testing
+							//displayBooks(goodReturns);// testing
 							books = checkOutBook(input.toLowerCase(), books);
-//							System.out.println("Should be checked out."); // testing
 						} else {
-//							System.out.println("Hola"); //test
 							for (int i = 0; i < books.size(); i++) {
-								//System.out.println(i + " for loop "); //test
 								if (books.get(i).getAuthor().toLowerCase().contains(input.toLowerCase())) {
 									input = books.get(i).getTitle();
-									//System.out.println(input); //test
 									break;
 								}
 							}
@@ -88,32 +84,27 @@ public class BookApp {
 					goodReturns = matchSearch(input.toLowerCase(), "genre", books);
 					displayBooks(goodReturns);
 					if (goodReturns.isEmpty()) {
-						System.out.println("We ain't got that genre here bruh"); // I am here!
+						System.out.println("That genre is not available."); 
 					} else {
 						if (goodReturns.size() > 1) {
 							input = Validator.getString(scnr, "Which title would you like?");
 							goodReturns = matchSearch(input.toLowerCase(), "title", goodReturns);
-							displayBooks(goodReturns);// testing
 							books = checkOutBook(input.toLowerCase(), books);
 							if (goodReturns.size() > 1) {
 								System.out.println("We actually have more than one book with that word. Please select an author for your choice to be more clear.");
 								input = Validator.getString(scnr, "Which author would you like?");
 								goodReturns = matchSearch(input.toLowerCase(), "author", books);
 								for (int i = 0; i < books.size(); i++) {
-									//System.out.println(i + " for loop "); //test
 									if (books.get(i).getAuthor().toLowerCase().contains(input.toLowerCase())) {
 										input = books.get(i).getTitle();
-										//System.out.println(input); //test
 										break;
 									}
 								}
 							}
 						} else {
 							for (int i = 0; i < books.size(); i++) {
-								//System.out.println(i + " for loop "); //test
 								if (books.get(i).getGenre().toLowerCase().contains(input.toLowerCase())) {
 									input = books.get(i).getTitle();
-									//System.out.println(input); //test
 									break;
 								}
 							}
@@ -134,10 +125,10 @@ public class BookApp {
 				displayBooks(books);//testing
 
 			}else {
+				System.out.println("Thank you for visiting have a wonderful day!!");
 				try {
 					LibraryInventoryUtil.rewriteFile(books);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					System.out.println("Unable to write file");
 				}
 				Valid = false;
@@ -200,23 +191,17 @@ public class BookApp {
 	}
 
 	public static List<Book> checkOutBook(String choice, List<Book> books) {
-//		System.out.println(choice + "Hi"); // testing
 		for (int i = 0; i < books.size(); i++) {
 			if (books.get(i).getTitle().toLowerCase().contains(choice)) {
-//				System.out.println(books.get(i).getStatus().toLowerCase()); // testing
-//				System.out.println(Status.onShelf.toString().toLowerCase()); // testing
 				if (books.get(i).getStatus().toLowerCase().equals(Status.onShelf.toString().toLowerCase())) {
 					books.get(i).makeDueDate();
 					System.out.println(
 							"Successful transaction. Book is now checked out until " + books.get(i).getDueDate() + ".");
 					books.get(i).setStatus(Status.checkedOut.toString());
-//					System.out.println(books.get(i).getStatus().toLowerCase()); //test
-//					System.out.println(books.get(i).getDueDate()); // test
 				} else {
 					System.out
-							.println("Sorry Charlie. That book ain't here. Pick anotha Charlie. It's checked out until "
+							.println("Book is not available. It's checked out until "
 									+ books.get(i).getDueDate());
-					// add due dates
 				}
 			}
 		}
@@ -229,8 +214,10 @@ public class BookApp {
 		for (int i = 0; i < books.size(); i++) {
 			if (books.get(i).getSerialNum() == serialNum) {
 				books.get(i).setStatus(Status.onShelf.toString());
+				if (books.get(i).isExpired() == true) {
+					System.out.println("You owe $10.00 for each day you're late!!");
+				}
 				books.get(i).returnBook();
-				System.out.println(books.get(i).getDueDate());// Testing
 
 			}
 		}

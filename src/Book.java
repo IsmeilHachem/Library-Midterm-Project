@@ -70,7 +70,6 @@ public class Book extends Genre{
 		LocalDate today = LocalDate.now(); //Collect today's date
 		
 		dueDate = today.plusDays(14);
-		System.out.println(dueDate); //Testing
 		
 	}
 	
@@ -80,13 +79,11 @@ public class Book extends Genre{
 		
 		//If statement to check due date to today's date
 		if (today.isAfter(dueDate)) {
-			System.out.println("Late"); //Testing
+			System.out.println("Late"); 
 			return true;
 		}else if(today.isBefore(dueDate)) {
-			System.out.println("This book is early");
 			return false;
 		}else {
-			System.out.println("On Time"); //Testing
 			return false;
 		}
 		

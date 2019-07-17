@@ -3,8 +3,8 @@
 "The Witching Hour",Anne Rice,Checked out,3,Horror,2019-07-31
 "It",Stephen King,On Shelf,4,Horror,null
 "Alicia en el Pais de Maravillas",Lewis Carroll,On Shelf,5,Children,null
-"Winnie The Pooh",A. A. Mine,On Shelf,6,Children,null
-"One Foot Two Foot Red Fish Blue Fish",Dr. Seuss,On Shelf,7,Children,null
+"Winnie The Pooh",A. A. Mine,Checked out,6,Children,2019-07-31
+"One Foot Two Foot Red Fish Blue Fish",Dr. Seuss,Checked out,7,Children,2019-07-31
 "The Little Red Hen",Diane Muldrow,Checked Out,8,Children,2019-07-23
 "Harry Potter and The Philosopher's Stone",J.K. Rowling,On Shelf,9,Mystery,null
 "Harry Potter and The Chamber of Secrets",J.K. Rowling,On Shelf,10,Mystery,null
