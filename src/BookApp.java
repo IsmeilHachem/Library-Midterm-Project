@@ -83,15 +83,49 @@ public class BookApp {
 						}
 					}
 
-				}
-					else {
-						
-						input = Validator.getString(scnr, "Enter Genre name: ");
-						goodReturns = matchSearch(input.toLowerCase(), "genre", books);
-						if (goodReturns.isEmpty()) {
-							System.out.println("We ain't got that genre here bruh"); // I am here!
+				} else {
+					input = Validator.getString(scnr, "Enter Genre name: ");
+					goodReturns = matchSearch(input.toLowerCase(), "genre", books);
+					displayBooks(goodReturns);
+					if (goodReturns.isEmpty()) {
+						System.out.println("We ain't got that genre here bruh"); // I am here!
+					} else {
+						if (goodReturns.size() > 1) {
+							input = Validator.getString(scnr, "Which title would you like?");
+							goodReturns = matchSearch(input.toLowerCase(), "title", goodReturns);
+							displayBooks(goodReturns);// testing
+							books = checkOutBook(input.toLowerCase(), books);
+							if (goodReturns.size() > 1) {
+								System.out.println("We actually have more than one book with that word. Please select an author for your choice to be more clear.");
+								input = Validator.getString(scnr, "Which author would you like?");
+								goodReturns = matchSearch(input.toLowerCase(), "author", books);
+								for (int i = 0; i < books.size(); i++) {
+									//System.out.println(i + " for loop "); //test
+									if (books.get(i).getAuthor().toLowerCase().contains(input.toLowerCase())) {
+										input = books.get(i).getTitle();
+										//System.out.println(input); //test
+										break;
+									}
+								}
+
+
+							}
+						} else {
+							for (int i = 0; i < books.size(); i++) {
+								//System.out.println(i + " for loop "); //test
+								if (books.get(i).getGenre().toLowerCase().contains(input.toLowerCase())) {
+									input = books.get(i).getTitle();
+									//System.out.println(input); //test
+									break;
+								}
+							}
 						}
-						displayBooks(goodReturns);
+//						books = checkOutBook(input.toLowerCase(), books);
+						
+					}
+//					displayBooks(goodReturns);
+//					books = checkOutBook(input.toLowerCase(), books);
+
 				}
 
 				//Return Book options
@@ -156,13 +190,13 @@ public class BookApp {
 				}
 			}
 		}
-//		case "genre": {
-//			for (int i = 0; i < books.size(); i++) {
-//				if (books.get(i).getGenre().toLowerCase().equals(choice)) {
-//					bookMatches.add(books.get(i));
-//				}
-//			}
-//		}
+		case "genre": {
+			for (int i = 0; i < books.size(); i++) {
+				if (books.get(i).getGenre().toLowerCase().equals(choice)) {
+					bookMatches.add(books.get(i));
+				}
+			}
+		}
 
 		}
 
@@ -193,19 +227,18 @@ public class BookApp {
 		return books;
 
 	}
-	
+
 	public static List<Book> bookReturn(int serialNum, List<Book> books) {
-		
+
 		for (int i = 0; i < books.size(); i++) {
-			if(books.get(i).getSerialNum() == serialNum)
-			{
+			if (books.get(i).getSerialNum() == serialNum) {
 				books.get(i).setStatus(Status.onShelf.toString());
 				books.get(i).returnBook();
-				System.out.println(books.get(i).getDueDate());//Testing
-				
+				System.out.println(books.get(i).getDueDate());// Testing
+
 			}
 		}
-		
+
 		return books;
 	}
 }
