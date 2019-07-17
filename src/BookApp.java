@@ -84,12 +84,15 @@ public class BookApp {
 					}
 
 				}
-//					else {
-//					System.out.println("Enter Genre: ");
-//					input = scnr.nextLine();
-//					goodReturns = matchSearch(input.toLowerCase(), "genre", books);
-//					displayBooks(goodReturns);
-//				}
+					else {
+						
+						input = Validator.getString(scnr, "Enter Genre name: ");
+						goodReturns = matchSearch(input.toLowerCase(), "genre", books);
+						if (goodReturns.isEmpty()) {
+							System.out.println("We ain't got that genre here bruh"); // I am here!
+						}
+						displayBooks(goodReturns);
+				}
 
 				//Return Book options
 			} else if (userChoice == 2) {
