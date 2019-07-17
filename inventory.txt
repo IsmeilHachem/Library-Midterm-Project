@@ -14,3 +14,4 @@
 "The 48 laws of power",Robert Greene,On Shelf,14,Inspirational,null
 "The Alchemist",Paulo Coelho,On Shelf,15,Inspirational,null
 "The Power of Habit",Charles Duhigg,On Shelf,16,Inspirational,null
+"Green Eggs and Ham",Dr. Seuss,On Shelf,17,Children,null

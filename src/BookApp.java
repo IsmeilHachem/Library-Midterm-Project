@@ -35,7 +35,7 @@ public class BookApp {
 		do {
 			// Added Validator for user choice
 			userChoice = Validator.getInt(scnr,
-					"Are you here to\n 1. Get a book?\n 2. Return a book?\n 3. Exit");
+					"Are you here to\n 1. Get a book?\n 2. Return a book?\n 3. Add a book?\n 4. Exit");
 			
 			//Break up display
 			System.out.println("\n" + flare + "\n");
@@ -155,6 +155,30 @@ public class BookApp {
 				
 				books = bookReturn(serialNumb, books);				
 
+				//add book
+			}else if (userChoice == 3) {
+				Book newBook = new Book();
+				
+				newBook.setTitle("\"" + Validator.getString(scnr, "Enter Title:")+ "\"");
+				newBook.setAuthor(Validator.getString(scnr, "Enter Author:"));
+				newBook.setStatus(Status.onShelf.toString());				
+				int lastSerialNum = books.get(books.size()-1).getSerialNum();				
+				newBook.setSerialNum(lastSerialNum + 1);				
+				newBook.setGenre(Validator.getString(scnr, "Enter Genre:"));
+				newBook.returnBook();				
+				books.add(newBook);
+				
+				
+				try {
+					LibraryInventoryUtil.appendToFile(newBook);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					System.out.println("Unable to add book");
+				}
+				System.out.println("This book has been saved!");
+				
+				//Break up display
+				System.out.println("\n" + flare + "\n");
 			}else {
 				System.out.println("Thank you for visiting have a wonderful day!!");
 				try {
