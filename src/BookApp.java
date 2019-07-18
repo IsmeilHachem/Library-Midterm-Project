@@ -34,11 +34,10 @@ public class BookApp {
 
 		do {
 			// Added Validator for user choice
-			userChoice = Validator.getInt(scnr, "Select from the options below:\n 1. Get a book?\n 2. Return a book?\n 3. Add a book?\n 4. Exit");
+			userChoice = Validator.getInt(scnr,
+					"Select from the options below:\n 1. Get a book?\n 2. Return a book?\n 3. Add a book?\n 4. Exit");
 
-			
-
-			//Break up display
+			// Break up display
 			System.out.println("\n" + flare + "\n");
 			if (userChoice == 1) {
 				// Display list of book objects
@@ -60,10 +59,11 @@ public class BookApp {
 					System.out.println();// break up display
 					goodReturns = matchSearch(input.toLowerCase(), "title", books);
 					displayBooks(goodReturns);
-					while(goodReturns.size() > 1)
+					while (goodReturns.size() > 1)
 
 					{
-						input = Validator.getString(scnr, "We have more than one title with that search. Can you be more descriptive");
+						input = Validator.getString(scnr,
+								"We have more than one title with that search. Can you be more descriptive");
 						System.out.println(); // break up display
 						goodReturns = matchSearch(input.toLowerCase(), "title", goodReturns);
 						displayBooks(goodReturns);
@@ -119,7 +119,7 @@ public class BookApp {
 					System.out.println("\n" + flare + "\n");
 					if (goodReturns.isEmpty()) {
 						System.out.println("That genre is not available.");
-						
+
 						// Break up display
 						System.out.println("\n" + flare + "\n");
 					} else {
@@ -128,7 +128,7 @@ public class BookApp {
 							input = Validator.getString(scnr, "Which title would you like?");
 							System.out.println(); // break up display
 							goodReturns = matchSearch(input.toLowerCase(), "title", goodReturns);
-							//books = checkOutBook(input.toLowerCase(), books);
+							// books = checkOutBook(input.toLowerCase(), books);
 							if (goodReturns.size() > 1) {
 								System.out.println(
 										"We actually have more than one book with that word. Please select an author for your choice to be more clear.");
@@ -146,17 +146,16 @@ public class BookApp {
 								books = checkOutBook(input.toLowerCase(), books);
 								// Break up display
 								System.out.println("\n" + flare + "\n");
-							}else {
+							} else {
 								for (int i = 0; i < books.size(); i++) {
 									if (books.get(i).getGenre().toLowerCase().contains(input.toLowerCase())) {
 										input = books.get(i).getTitle();
 										break;
 									}
 								}
-								System.out.println("print " + input);
 								goodReturns = matchSearch(input.toLowerCase(), "title", books);
 								books = checkOutBook(input.toLowerCase(), books);
-						} 
+							}
 						}
 
 					}
@@ -169,13 +168,11 @@ public class BookApp {
 				// use validator class to verify input
 				serialNumb = Validator.getInt(scnr, "Enter the serial number please.");
 
-				
-				System.out.println();//break up display
+				System.out.println();// break up display
 				books = bookReturn(serialNumb, books);
-				
+
 				// Break up display
 				System.out.println("\n" + flare + "\n");
-
 
 				// add book
 			} else if (userChoice == 3) {
@@ -285,12 +282,11 @@ public class BookApp {
 
 	public static List<Book> bookReturn(int serialNum, List<Book> books) {
 
-		if(serialNum < 0 || serialNum > books.size() -1)
-		{
+		if (serialNum < 0 || serialNum > books.size() - 1) {
 			System.out.println("Serial number does not exist.");
 			return books;
 		}
-		
+
 		for (int i = 0; i < books.size(); i++) {
 			if (books.get(i).getSerialNum() == serialNum) {
 				if (books.get(i).getStatus().equals(Status.checkedOut)) {
@@ -300,7 +296,7 @@ public class BookApp {
 						System.out.println();// break up display
 					}
 					books.get(i).returnBook();
-				}else {
+				} else {
 					System.out.println("This book is not checked out!");
 				}
 			}
