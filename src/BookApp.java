@@ -35,7 +35,7 @@ public class BookApp {
 		do {
 			// Added Validator for user choice
 			userChoice = Validator.getInt(scnr,
-					"Are you here to\n 1. Get a book?\n 2. Return a book?\n 3. Add a book?\n 4. Exit");
+					"Are you here to: (Please input 1, 2, or 3)\n 1. Get a book?\n 2. Return a book?\n 3. Add a book?\n 4. Exit");
 			
 			//Break up display
 			System.out.println("\n" + flare + "\n");
@@ -48,7 +48,7 @@ public class BookApp {
 				// Prompt user for search choice
 				// collect user input
 				userChoice = Validator.getInt(scnr,
-						"Select how you'd like to retrieve book:\n 1. Search by Title\n 2. Search by Author\n 3. Search by Genre");
+						"Select how you'd like to retrieve book: (Please input 1, 2, or 3)\n 1. Search by Title\n 2. Search by Author\n 3. Search by Genre");
 
 				//Break up display
 				System.out.println("\n" + flare + "\n");
@@ -59,6 +59,13 @@ public class BookApp {
 					System.out.println();//break up display
 					goodReturns = matchSearch(input.toLowerCase(), "title", books);
 					displayBooks(goodReturns);
+					while(goodReturns.size() > 1)
+                    {
+                        input = Validator.getString(scnr, "We have more than one title with that search. Can you be more descriptive.");
+                        System.out.println(); // break up display
+                        goodReturns = matchSearch(input.toLowerCase(), "title", goodReturns);
+                        displayBooks(goodReturns);
+                    }
 					System.out.println();//break up display
 					books = checkOutBook(input.toLowerCase(), books);
 					
@@ -152,7 +159,8 @@ public class BookApp {
 
 				// use validator class to verify input
 				serialNumb = Validator.getInt(scnr, "Enter the serial number please.");
-				
+				displayBooks(goodReturns); //testing 
+
 				books = bookReturn(serialNumb, books);				
 
 				//add book
@@ -180,7 +188,7 @@ public class BookApp {
 				//Break up display
 				System.out.println("\n" + flare + "\n");
 			}else {
-				System.out.println("Thank you for visiting have a wonderful day!!");
+				System.out.println("Thank you for visiting, have a wonderful day!!");
 				try {
 					LibraryInventoryUtil.rewriteFile(books);
 				} catch (IOException e) {
@@ -202,7 +210,7 @@ public class BookApp {
 
 		// Print out headers for the columns
 		System.out.printf("%-40s\t%-20s\t%-15s\t%-14s\t%-15s\n", "Title", "Author", "Status", "Serial Number", "Genre");
-
+		System.out.println(); // added this to space header from list
 		// Collect book items from IO File and print on single lines
 		List<Book> books = bookList;
 		for (Book b : books) {

@@ -7,7 +7,7 @@
 "One Foot Two Foot Red Fish Blue Fish",Dr. Seuss,Checked out,7,Children,2019-07-31
 "The Little Red Hen",Diane Muldrow,Checked Out,8,Children,2019-07-23
 "Harry Potter and The Philosopher's Stone",J.K. Rowling,On Shelf,9,Mystery,null
-"Harry Potter and The Chamber of Secrets",J.K. Rowling,On Shelf,10,Mystery,null
+"Harry Potter and The Chamber of Secrets",J.K. Rowling,Checked out,10,Mystery,2019-07-31
 "Harry Potter and The Prisoner of Azkaban",J.K. Rowling,On Shelf,11,Mystery,null
 "Harry Potter and the Goblet of Fire",J.K. Rowling,On Shelf,12,Mystery,null
 "Who says you can't you do",Daniel Chidiac,On Shelf,13,Inspirational,null
