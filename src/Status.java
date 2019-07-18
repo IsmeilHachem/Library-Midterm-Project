@@ -6,7 +6,7 @@ public enum Status {
 		}
 	}, checkedOut{
 		public String toString() {
-			return "Checked out";
+			return "Checked Out";
 		}
 	} 
 	

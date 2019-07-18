@@ -288,8 +288,8 @@ public class BookApp {
 		}
 
 		for (int i = 0; i < books.size(); i++) {
-			if (books.get(i).getSerialNum() == serialNum) {
-				if (books.get(i).getStatus().equals(Status.checkedOut)) {
+			if (books.get(i).getSerialNum() == serialNum) {				
+				if (books.get(i).getStatus().equals(Status.checkedOut.toString())) {
 					books.get(i).setStatus(Status.onShelf.toString());
 					if (books.get(i).isExpired() == true) {
 						System.out.println("You owe $10.00 for each day you're late!!");
